@@ -1,4 +1,5 @@
 ﻿@model TopBeers.Models.UsuarioModel
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +11,7 @@
     <link rel="stylesheet" href="~/css/site.css">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </head>
-<body>
+<body onload="CarregarUsuarioLogado">
     <div class="wrapper">
         <!-- Navbar -->
         <nav class="navbar navbar-expand navbar-dark bg-dark" role="navigation">
@@ -25,8 +26,11 @@
                         <li class="nav-item"> @Html.ActionLink("Quem Somos", "QuemSomos", "Home", null, new { @class = "nav-link" })</li>
                         <li class="nav-item">@Html.ActionLink("Contato", "Contato", "Home", null, new { @class = "nav-link" })</li>
                     </ul>
-                    <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
+                    @using Microsoft.AspNetCore.Http;
+                    @inject IHttpContextAccessor HttpContextAccessor
+                    <div id="NomeUsuarioLogado"></div>
 
+                    <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
                         <li class="dropdown order-1">
                             <button type="button" id="dropdownMenu1" data-toggle="dropdown" class="btn btn-outline-secondary dropdown-toggle">Login<span class="caret"></span></button>
                             <ul class="dropdown-menu dropdown-menu-right mt-2">
@@ -82,4 +86,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
+<script>
+    function CarregarUsuarioLogado()
+    {
+        var nome = '@HttpContextAccessor.HttpContext.Session.GetString("NomeUsuarioLogado")'
+        var divNome = document.getElementById("NomeUsuarioLogado");
+        divNome.innerHTML = "Ola " + nome;
+        divNome.style = "color:#ffffff; text-align: right;" 
+    }
+</script>
 </html>
+

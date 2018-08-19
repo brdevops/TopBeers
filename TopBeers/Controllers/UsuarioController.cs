@@ -22,7 +22,8 @@ namespace TopBeers.Controllers
             bool login = usuario.ValidarLogin();
             if (login)
             {
-                TempData["NomeUsuarioLogado"] = usuario.Email;
+                HttpContext.Session.SetString("NomeUsuarioLogado", usuario.Nome);
+                HttpContext.Session.SetString("IdUsuarioLogado", usuario.Id.ToString());
                 return RedirectToAction("Index", "Home");
             }
             else
