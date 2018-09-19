@@ -16,12 +16,22 @@ namespace TopBeers.Controllers
             return View();
         }
 
+        public IActionResult Avaliar()
+        {
+            return View();
+        }
+
         public IActionResult Cadastrar()
         {
             return View();
         }
 
         public IActionResult Contato()
+        {
+            return View();
+        }
+
+        public IActionResult Procurar()
         {
             return View();
         }
