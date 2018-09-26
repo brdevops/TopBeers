@@ -1,9 +1,10 @@
 ﻿@model UsuarioModel
 <!-- Search Beer -->
 <div class="jumbotron jumbotron-fluid">
-    <h1 class="text-center">
-        Pesquise por cervejas e saiba sua reputação, opiniões e mais.
-    </h1><br>
+    <div class="form-group">
+        <h2 class="text-center">
+            Pesquise por cervejas, e saiba sua reputação feita pelos maiores alcoólatras do mundo!
+    </div>
     <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
         <form>
             <div class="form-row">
@@ -11,7 +12,7 @@
                     <input type="email" class="form-control form-control-lg" placeholder="Busque a cerveja desejada">
                 </div>
                 <div class="col-12 col-md-3">
-                    <button type="submit" class="btn btn-block btn-lg btn-primary">Buscar</button>
+                    <button type="submit" class="btn btn-block btn-lg btn-success">@Html.ActionLink("Buscar", "Procurar", "Home", null)</button>
                 </div>
             </div>
         </form>
@@ -49,7 +50,7 @@
                                 <small class="text-muted">Nota: 9,8</small>
                                 <small class="text-muted">Teor: 5%</small>
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Ver mais</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">@Html.ActionLink("Avaliar", "Avaliar", "Home", null)</button>
                                 </div>
                             </div>
                         </div>
@@ -69,7 +70,7 @@
                                 <small class="text-muted">Nota: 9,7</small>
                                 <small class="text-muted">Teor: 5%</small>
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Ver mais</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Avaliar</button>
                                 </div>
                             </div>
                         </div>
@@ -89,7 +90,7 @@
                                 <small class="text-muted">Nota: 9,6</small>
                                 <small class="text-muted">Teor: 5%</small>
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Ver mais</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Avaliar</button>
                                 </div>
                             </div>
                         </div>
@@ -109,7 +110,7 @@
                                 <small class="text-muted">Nota: 9,5</small>
                                 <small class="text-muted">Teor: 4%</small>
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Ver mais</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Avaliar</button>
                                 </div>
                             </div>
                         </div>
@@ -119,17 +120,17 @@
                 <div class="col-md-3">
                     <div class="card mb-4 shadow-sm">
                         <div class="text-center">
-                            <img class="text-center img-responsive" src="~/images/brahma-logo.png" alt="Card image" width="197px" height="166px">
+                            <img class="text-center img-responsive" src="~/images/antarctica-logo.png" alt="Card image" width="197px" height="166px">
                         </div>
                         <div class="card-body">
-                            <h3 class="card-title text-center">Brahma Chopp</h3>
-                            <p class="card-text">A história da marca se confunde com a da Companhia Cervejaria Brahma que a fabricava. O nome Brahma batizou...</p>
+                            <h3 class="card-title text-center">Antarctica</h3>
+                            <p class="card-text">Em 1888 criou-se a primeira fábrica de cerveja do país com tecnologia de baixa fermentação, com uma capacidade...</p>
                             <div class="d-flex justify-content-between align-items-center">
 
-                                <small class="text-muted">Nota: 9,8</small>
+                                <small class="text-muted">Nota: 9,4</small>
                                 <small class="text-muted">Teor: 5%</small>
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Ver mais</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Avaliar</button>
                                 </div>
                             </div>
                         </div>
@@ -139,17 +140,17 @@
                 <div class="col-md-3">
                     <div class="card mb-4 shadow-sm">
                         <div class="text-center">
-                            <img class="img-responsive" src="~/images/heineken-logo.png" alt="Card image" width="197px" height="166px">
+                            <img class="img-responsive" src="~/images/budweiser-logo.png" alt="Card image" width="197px" height="166px">
                         </div>
                         <div class="card-body">
-                            <h3 class="card-title text-center">Heineken</h3>
-                            <p class="card-text">A Heineken foi fundada em 16 de dezembro de 1863 por Gerard Adriaan Heineken após a aquisição da cervejaria...</p>
+                            <h3 class="card-title text-center">Budweiser</h3>
+                            <p class="card-text">Tudo começou quando a cervejaria Anheuser-Busch, sediada na cidade de St. Louis, introduziu no mercado americano...</p>
                             <div class="d-flex justify-content-between align-items-center">
 
-                                <small class="text-muted">Nota: 9,7</small>
+                                <small class="text-muted">Nota: 9,3</small>
                                 <small class="text-muted">Teor: 5%</small>
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Ver mais</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Avaliar</button>
                                 </div>
                             </div>
                         </div>
@@ -159,17 +160,17 @@
                 <div class="col-md-3">
                     <div class="card mb-4 shadow-sm">
                         <div class="text-center">
-                            <img class="text-center img-responsive" src="~/images/itaipava-logo.png" alt="Card image" width="197px" height="166px">
+                            <img class="text-center img-responsive" src="~/images/skol-logo.png" alt="Card image" width="197px" height="166px">
                         </div>
                         <div class="card-body">
-                            <h3 class="card-title text-center">Itaipava</h3>
-                            <p class="card-text">Decorria o ano de 1993 quando um grupo de empresários se associou e decidiu comprar algumas máquinas, equipamentos...</p>
+                            <h3 class="card-title text-center">Skol</h3>
+                            <p class="card-text">Skol é uma marca de cerveja de propriedade da empresa dinamarquesa Carlsberg, com licença para ser fabricada no Brasil...</p>
                             <div class="d-flex justify-content-between align-items-center">
 
-                                <small class="text-muted">Nota: 9,6</small>
+                                <small class="text-muted">Nota: 9,2</small>
                                 <small class="text-muted">Teor: 5%</small>
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Ver mais</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Avaliar</button>
                                 </div>
                             </div>
                         </div>
@@ -179,17 +180,17 @@
                 <div class="col-md-3">
                     <div class="card mb-4 shadow-sm">
                         <div class="text-center">
-                            <img class="text-center img-responsive" src="~/images/stellaartois-logo.png" alt="Card image" width="197px" height="166px">
+                            <img class="text-center img-responsive" src="~/images/glacial-logo.png" alt="Card image" width="197px" height="166px">
                         </div>
                         <div class="card-body">
-                            <h3 class="card-title text-center">Stella Artois</h3>
-                            <p class="card-text">A história de Stella Artois começa em uma pequena cervejaria na cidade de Leuven, no interior da Bélgica...</p>
+                            <h3 class="card-title text-center">Glacial</h3>
+                            <p class="card-text">Fundada em 1939 a Schincariol iniciou suas atividades produzindo o refrigerante Itubaína com sabor tutti-frutti...</p>
                             <div class="d-flex justify-content-between align-items-center">
 
-                                <small class="text-muted">Nota: 9,5</small>
+                                <small class="text-muted">Nota: 5,0</small>
                                 <small class="text-muted">Teor: 4%</small>
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Ver mais</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Avaliar</button>
                                 </div>
                             </div>
                         </div>
@@ -245,7 +246,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <a href="#" class="btn btn-primary">Ver mais</a>
+                        <a href="#" class="btn btn-primary">Avaliar</a>
                     </div>
                 </div>
             </div>
@@ -256,7 +257,7 @@
                         <h4 class="card-title">
                             Heineken</h4>
                         <p class="card-text">Heineken Larger Beer, ou simplesmente Heineken...</p>
-                        <a href="#" class="btn btn-primary">Ver mais</a>
+                        <a href="#" class="btn btn-primary">Avaliar</a>
                     </div>
                 </div>
             </div>
@@ -267,7 +268,7 @@
                         <h4 class="card-title">
                             Stella Artois</h4>
                         <p class="card-text">A Stella Artois é uma cerveja pilsen lager...</p>
-                        <a href="#" class="btn btn-primary">Ver mais</a>
+                        <a href="#" class="btn btn-primary">Avaliar</a>
                     </div>
                 </div>
             </div>
@@ -278,7 +279,7 @@
                         <h4 class="card-title">
                             Itaipava</h4>
                         <p class="card-text">Itaipava é uma cerveja brasileira fabricada...</p>
-                        <a href="#" class="btn btn-primary">Ver mais</a>
+                        <a href="#" class="btn btn-primary">Avaliar</a>
                     </div>
                 </div>
             </div>
@@ -289,7 +290,7 @@
                         <h4 class="card-title">
                             Itaipava</h4>
                         <p class="card-text">Itaipava é uma cerveja brasileira fabricada...</p>
-                        <a href="#" class="btn btn-primary">Ver mais</a>
+                        <a href="#" class="btn btn-primary">Avaliar</a>
                     </div>
                 </div>
             </div>
