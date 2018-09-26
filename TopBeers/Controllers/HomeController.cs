@@ -39,8 +39,8 @@ namespace TopBeers.Controllers
         public IActionResult Index()
         {
             HomeModel objHomeModel = new HomeModel();
-            string nome = objHomeModel.LerNomeUsuario();
-            ViewData["Nome"] = nome;
+            //string nome = objHomeModel.LerNomeUsuario();
+            //ViewData["Nome"] = nome;
 
             return View();
         }

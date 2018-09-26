@@ -16,21 +16,21 @@ namespace TopBeers.Controllers
             return View();
         }
 
-        [HttpPost]
-        public IActionResult ValidarLogin(UsuarioModel usuario)
-        {
-            bool login = usuario.ValidarLogin();
-            if (login)
-            {
-                HttpContext.Session.SetString("NomeUsuarioLogado", usuario.Nome);
-                HttpContext.Session.SetString("IdUsuarioLogado", usuario.Id.ToString());
-                return RedirectToAction("Index", "Home");
-            }
-            else
-            {
-                TempData["MensagemLoginInvalido"] = "Dados de login incorretos!";
-                return RedirectToAction("Beneficios", "Home");
-            }
-        }
+        //[HttpPost]
+        //public IActionResult ValidarLogin(UsuarioModel usuario)
+        //{
+        //    bool login = usuario.ValidarLogin();
+        //    if (login)
+        //    {
+        //        HttpContext.Session.SetString("NomeUsuarioLogado", usuario.Nome);
+        //        HttpContext.Session.SetString("IdUsuarioLogado", usuario.Id.ToString());
+        //        return RedirectToAction("Index", "Home");
+        //    }
+        //    else
+        //    {
+        //        TempData["MensagemLoginInvalido"] = "Dados de login incorretos!";
+        //        return RedirectToAction("Beneficios", "Home");
+        //    }
+        //}
     }
 }
