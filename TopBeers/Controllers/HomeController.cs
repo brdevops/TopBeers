@@ -10,6 +10,12 @@ namespace TopBeers.Controllers
 {
     public class HomeController : Controller
     {
+        private CervejaContext db = new CervejaContext();
+
+        public IActionResult Index()
+        {
+            return View();
+        }
 
         public IActionResult Beneficios()
         {
@@ -36,14 +42,7 @@ namespace TopBeers.Controllers
             return View();
         }
 
-        public IActionResult Index()
-        {
-            HomeModel objHomeModel = new HomeModel();
-            //string nome = objHomeModel.LerNomeUsuario();
-            //ViewData["Nome"] = nome;
 
-            return View();
-        }
 
         public IActionResult QuemSomos()
         {

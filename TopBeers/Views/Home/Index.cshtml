@@ -1,9 +1,9 @@
-﻿@model UsuarioModel
-<!-- Search Beer -->
+﻿<!-- Search Beer -->
 <div class="jumbotron jumbotron-fluid">
     <div class="form-group">
         <h2 class="text-center">
             Pesquise por cervejas, e saiba sua reputação feita pelos maiores alcoólatras do mundo!
+        </h2>
     </div>
     <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
         <form>
@@ -12,8 +12,8 @@
                     <input type="email" class="form-control form-control-lg" placeholder="Busque a cerveja desejada">
                 </div>
                 <div class="col-12 col-md-3">
-                    <button type="submit" class="btn btn-block btn-lg btn-success">@Html.ActionLink("Buscar", "Procurar", "Home", null)</button>
-                </div>
+                    <a href="@Url.Action("Procurar", "Home")" class="btn btn-block btn-lg btn-success">Buscar</a>
+</div>
             </div>
         </form>
     </div>
@@ -40,7 +40,7 @@
                 <div class="col-md-3">
                     <div class="card mb-4 shadow-sm">
                         <div class="text-center">
-                            <img class="text-center img-responsive" src="~/images/brahma-logo.png" alt="Card image" width="197px" height="166px">
+                            <img class="img-fluid" src="~/images/brahma-logo.png" alt="Card image">
                         </div>
                         <div class="card-body">
                             <h3 class="card-title text-center">Brahma Chopp</h3>
@@ -60,7 +60,7 @@
                 <div class="col-md-3">
                     <div class="card mb-4 shadow-sm">
                         <div class="text-center">
-                            <img class="img-responsive" src="~/images/heineken-logo.png" alt="Card image" width="197px" height="166px">
+                            <img class="img-fluid" src="~/images/heineken-logo.png" alt="Card image">
                         </div>
                         <div class="card-body">
                             <h3 class="card-title text-center">Heineken</h3>
@@ -80,7 +80,7 @@
                 <div class="col-md-3">
                     <div class="card mb-4 shadow-sm">
                         <div class="text-center">
-                            <img class="text-center img-responsive" src="~/images/itaipava-logo.png" alt="Card image" width="197px" height="166px">
+                            <img class="text-center img-fluid" src="~/images/itaipava-logo.png" alt="Card image">
                         </div>
                         <div class="card-body">
                             <h3 class="card-title text-center">Itaipava</h3>
@@ -100,7 +100,7 @@
                 <div class="col-md-3">
                     <div class="card mb-4 shadow-sm">
                         <div class="text-center">
-                            <img class="text-center img-responsive" src="~/images/stellaartois-logo.png" alt="Card image" width="197px" height="166px">
+                            <img class="text-center img-fluid" src="~/images/stellaartois-logo.png" alt="Card image">
                         </div>
                         <div class="card-body">
                             <h3 class="card-title text-center">Stella Artois</h3>
@@ -120,7 +120,7 @@
                 <div class="col-md-3">
                     <div class="card mb-4 shadow-sm">
                         <div class="text-center">
-                            <img class="text-center img-responsive" src="~/images/antarctica-logo.png" alt="Card image" width="197px" height="166px">
+                            <img class="text-center img-fluid" src="~/images/antarctica-logo.png" alt="Card image">
                         </div>
                         <div class="card-body">
                             <h3 class="card-title text-center">Antarctica</h3>
@@ -140,7 +140,7 @@
                 <div class="col-md-3">
                     <div class="card mb-4 shadow-sm">
                         <div class="text-center">
-                            <img class="img-responsive" src="~/images/budweiser-logo.png" alt="Card image" width="197px" height="166px">
+                            <img class="img-fluid" src="~/images/budweiser-logo.png" alt="Card image">
                         </div>
                         <div class="card-body">
                             <h3 class="card-title text-center">Budweiser</h3>
@@ -160,7 +160,7 @@
                 <div class="col-md-3">
                     <div class="card mb-4 shadow-sm">
                         <div class="text-center">
-                            <img class="text-center img-responsive" src="~/images/skol-logo.png" alt="Card image" width="197px" height="166px">
+                            <img class="img-fluid" src="~/images/skol-logo.png" alt="Card image">
                         </div>
                         <div class="card-body">
                             <h3 class="card-title text-center">Skol</h3>
@@ -180,7 +180,7 @@
                 <div class="col-md-3">
                     <div class="card mb-4 shadow-sm">
                         <div class="text-center">
-                            <img class="text-center img-responsive" src="~/images/glacial-logo.png" alt="Card image" width="197px" height="166px">
+                            <img class="img-fluid" src="~/images/glacial-logo.png" alt="Card image">
                         </div>
                         <div class="card-body">
                             <h3 class="card-title text-center">Glacial</h3>
