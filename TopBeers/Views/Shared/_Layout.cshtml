@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Top Beers</title>
+        <title>@ViewData["Title"] - TopBeers</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="~/css/site.css">
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     </head>
-    <body onload="CarregarUsuarioLogado()">
+    <body >
         <div class="wrapper">
             <!-- Navbar -->
             <nav class="navbar navbar-expand navbar-dark bg-dark" role="navigation">
@@ -26,34 +26,7 @@
                             <li class="nav-item">@Html.ActionLink("Contato", "Contato", "Home", null, new { @class = "nav-link" })</li>
                         </ul>
 
-                        <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
-                            <li class="dropdown order-1">
-                                <button type="button" id="dropdownMenu1" data-toggle="dropdown" class="btn btn-outline-secondary dropdown-toggle">Login<span class="caret"></span></button>
-                                <ul class="dropdown-menu dropdown-menu-right mt-2">
-                                    <li class="px-2 py-1">
-                                        @*@using (Html.BeginForm("ValidarLogin", "Usuario", FormMethod.Post))
-                                        {
-                                            <div class="form-group">
-                                                @TempData["MensagemLoginInvalido"]
-                                            </div>
-                                            <div class="form-group">
-                                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control form-control-sm", @placeholder = "morena@pedecana.com.br", required = "required" })
-                                            </div>
-                                            <div class="form-group">
-                                                @Html.TextBoxFor(m => m.Senha, new { @class = "form-control form-control-sm", @placeholder = "Digite sua senha", required = "required", type = "password" })
-                                            </div>
-                                            <div class="form-group">
-                                                <button type="submit" class="btn btn-primary btn-block">Entrar</button>
-                                            </div>
-                                            <div class="form-group text-center">
-                                                <small>@Html.ActionLink("Esqueceu a senha?", "RecuperarSenha", "Home")</small>
-                                                <small>@Html.ActionLink("Cadastrar", "Cadastrar", "Home")</small>
-                                            </div>
-                                        }*@
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
+                        @await Html.PartialAsync("_LoginPartial")
                     </div>
                 </div>
             </nav>
@@ -90,6 +63,7 @@
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        @RenderSection("Scripts", required: false)
     </body>
 </html>
 

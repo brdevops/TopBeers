@@ -10,7 +10,7 @@ namespace TopBeers.Controllers
 {
     public class HomeController : Controller
     {
-        private CervejaContext db = new CervejaContext();
+        //private CervejaContext db = new CervejaContext();
 
         public IActionResult Index()
         {

@@ -5,15 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Models\NewFolder\**" />
-    <Content Remove="Models\NewFolder\**" />
-    <EmbeddedResource Remove="Models\NewFolder\**" />
-    <None Remove="Models\NewFolder\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Remove="Migrations\20181009121857_teste.cs" />
-    <Compile Remove="Migrations\20181009121857_teste.Designer.cs" />
+    <Compile Remove="Migrations\20181013194918_Teste.cs" />
+    <Compile Remove="Migrations\20181013194918_Teste.Designer.cs" />
     <Compile Remove="Models\CervejasModel.cs" />
     <Compile Remove="Models\Users.cs" />
   </ItemGroup>
@@ -23,6 +16,11 @@
     <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Dados\Negocio\" />
+    <Folder Include="Dados\Repositorio\" />
   </ItemGroup>
 
 </Project>

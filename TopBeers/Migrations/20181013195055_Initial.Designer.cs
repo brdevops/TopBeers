@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TopBeers.Models;
 
 namespace TopBeers.Migrations
 {
     [DbContext(typeof(CervejaContext))]
-    partial class CervejaContextModelSnapshot : ModelSnapshot
+    [Migration("20181013195055_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -233,6 +235,48 @@ namespace TopBeers.Migrations
                     b.ToTable("User");
                 });
 
+            modelBuilder.Entity("TopBeers.Models.CervejaModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Aprovado");
+
+                    b.Property<int>("CurrentTipoCervejaId");
+
+                    b.Property<string>("DescricaoCerveja")
+                        .IsRequired();
+
+                    b.Property<float>("GrauAlcoolico");
+
+                    b.Property<string>("NomeCerveja")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CurrentTipoCervejaId");
+
+                    b.ToTable("CervejaModel");
+                });
+
+            modelBuilder.Entity("TopBeers.Models.TipoCervejaModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("DescricaoTipo")
+                        .IsRequired();
+
+                    b.Property<string>("Tipo")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TipoCervejaModel");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.HasOne("TopBeers.Dados.Entities.Role")
@@ -283,6 +327,14 @@ namespace TopBeers.Migrations
                     b.HasOne("TopBeers.Dados.Entities.TipoCerveja", "TipoCerveja")
                         .WithMany("Cervejas")
                         .HasForeignKey("TipoCervejaId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("TopBeers.Models.CervejaModel", b =>
+                {
+                    b.HasOne("TopBeers.Models.TipoCervejaModel", "TipoCerveja")
+                        .WithMany("Cervejas")
+                        .HasForeignKey("CurrentTipoCervejaId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
