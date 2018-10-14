@@ -7,6 +7,10 @@
   <ItemGroup>
     <Compile Remove="Migrations\20181013194918_Teste.cs" />
     <Compile Remove="Migrations\20181013194918_Teste.Designer.cs" />
+    <Compile Remove="Migrations\20181014202220_Update2.cs" />
+    <Compile Remove="Migrations\20181014202220_Update2.Designer.cs" />
+    <Compile Remove="Migrations\20181014203319_Update2.cs" />
+    <Compile Remove="Migrations\20181014203319_Update2.Designer.cs" />
     <Compile Remove="Models\CervejasModel.cs" />
     <Compile Remove="Models\Users.cs" />
   </ItemGroup>
@@ -14,13 +18,8 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.1.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.1" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Dados\Negocio\" />
-    <Folder Include="Dados\Repositorio\" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.4" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.5" />
   </ItemGroup>
 
 </Project>

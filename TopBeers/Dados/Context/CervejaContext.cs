@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using TopBeers.Dados.Entities;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
+using System.IO;
 
 namespace TopBeers.Models
 {
@@ -22,14 +24,41 @@ namespace TopBeers.Models
 
         }
 
+        public CervejaContext()
+        {
+        }
 
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                IConfigurationRoot configuration = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json")
+                    .Build();
+                var connectionString = configuration.GetConnectionString("DefaultConnection");
+                optionsBuilder.UseSqlServer(connectionString);
+            }
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
             modelBuilder.Entity<Cerveja>()
                 .HasOne<TipoCerveja>(s => s.TipoCerveja)
                 .WithMany(g => g.Cervejas)
                 .HasForeignKey(s => s.TipoCervejaId);
+
+            modelBuilder.Entity<Cerveja>()
+                .HasOne<Cervejaria>(s => s.Cerverjaria)
+                .WithMany(g => g.Cervejas)
+                .HasForeignKey(s => s.CervejariaId);
+
+            modelBuilder.Entity<Avaliacao>()
+                .HasOne<Usuario>(s => s.Usuario)
+                .WithMany(g => g.Avaliacoes)
+                .HasForeignKey(s => s.UsuarioId);
 
             base.OnModelCreating(modelBuilder);
 

@@ -1,0 +1,196 @@
+﻿@using System.Linq
+@using Microsoft.AspNetCore.Mvc.Rendering
+@model TopBeers.Models.CervejaModel
+@{
+    ViewBag.Title = "index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center">Cervejas</h2>
+
+<div class="container">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#novoProfessor">Nova</button>
+    <br /><br />
+
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Quantidade</h5>
+                    @Model.ListaCervejas.Count()
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card  text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Alguma coisa</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card  text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Outra coisa</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br /><br />
+</div>
+
+
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Grau Alcoolico</th>
+                <th scope="col">Aprovado</th>
+                <th>Descrição</th>
+                <th>Opções</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var cerveja in Model.ListaCervejas)
+            {
+                <tr>
+                    <th scope="row"><a href="#">@cerveja.Id</a></th>
+                    <td>@cerveja.NomeCerveja</td>
+                    <td>@cerveja.GrauAlcoolico</td>
+                    <td>@cerveja.Aprovado</td>
+                    <td>@cerveja.DescricaoCerveja</td>
+                    <td>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Editar</button>
+                        <a href="@Url.Action("ExcluirProfessor", "Professor", new { idProfessor = cerveja.Id })" class="btn btn-danger">Excluir</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("SalvarCerveja", "Cerveja", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken();
+
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            @Html.LabelFor(model => model.NomeCerveja)
+                            @Html.TextBoxFor(model => model.NomeCerveja, new { @class = "form-control" })
+                            <div class="invalid-feedback">
+                                Valid first name is required.
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            @Html.LabelFor(model => model.GrauAlcoolico)
+                            @Html.TextBoxFor(model => model.GrauAlcoolico, new { @class = "form-control" })
+                            <div class="invalid-feedback">
+                                Valid last name is required.
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            @Html.LabelFor(model => model.DescricaoCerveja)
+                            @Html.TextBoxFor(model => model.DescricaoCerveja, new { @class = "form-control" })
+                            <div class="invalid-feedback">
+                                Valid last name is required.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            @Html.LabelFor(model => model.CurrentTipoCervejaId)
+                            @Html.TextBoxFor(model => model.CurrentTipoCervejaId, new { @class = "form-control" })
+                            <div class="invalid-feedback">
+                                Valid first name is required.
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Novo Professor -->
+<div class="modal fade" id="novoProfessor" tabindex="-1" role="dialog" aria-labelledby="novoProfessor" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Novo Professor</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("SalvarCerveja", "Cerveja", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken();
+
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            @Html.LabelFor(model => model.NomeCerveja)
+                            @Html.TextBoxFor(model => model.NomeCerveja, new { @class = "form-control" })
+                            <div class="invalid-feedback">
+                                Valid first name is required.
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            @Html.LabelFor(model => model.GrauAlcoolico)
+                            @Html.TextBoxFor(model => model.GrauAlcoolico, new { @class = "form-control" })
+                            <div class="invalid-feedback">
+                                Valid last name is required.
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            @Html.LabelFor(model => model.DescricaoCerveja)
+                            @Html.TextBoxFor(model => model.DescricaoCerveja, new { @class = "form-control" })
+                            <div class="invalid-feedback">
+                                Valid last name is required.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            @Html.LabelFor(model => model.CurrentTipoCervejaId)
+                            @Html.TextBoxFor(model => model.CurrentTipoCervejaId, new { @class = "form-control" })
+                            <div class="invalid-feedback">
+                                Valid first name is required.
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

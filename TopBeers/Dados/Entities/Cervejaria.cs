@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 
 namespace TopBeers.Dados.Entities
 {
-    public class TipoCerveja
+    public class Cervejaria
     {
-        public int Id { get; set; }
+        [Key]
+        public int IdCervejaria { get; set; }
         [MaxLength(50)]
-        public string Tipo { get; set; }
-        [MaxLength(255)]
-        public string DescricaoTipo { get; set; }
-
+        public string Nome { get; set; }
+        public DateTime Fundacao { get; set; }
         public ICollection<Cerveja> Cervejas { get; set; }
     }
 }
