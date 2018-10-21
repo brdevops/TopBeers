@@ -69,6 +69,16 @@ namespace TopBeers.Dados.Negocio
             }
         }
 
+        public IEnumerable<Cervejaria> List()
+        {
+            using ( var uow = new UnitOfWork())
+            {
+                var lista = uow.CervejariaRepositorio.GetAll();
+
+                return lista.ToList();
+            }
+        }
+
         public void ExcluirCervejaria(int idCervejaria)
         {
             using (var uow = new UnitOfWork())

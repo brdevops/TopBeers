@@ -11,19 +11,23 @@ namespace TopBeers.Controllers
 
     public class CervejaController : Controller
     {
-        private readonly CervejaNegocio _cervejaNegocio;
+        private readonly IntegracaoNegocio _integracaoNegocio;
 
         public CervejaController()
         {
-            _cervejaNegocio = new CervejaNegocio();
+            _integracaoNegocio = new IntegracaoNegocio();
         }
         public IActionResult Index()
         {
-            var listaCervejas = _cervejaNegocio.ListarTodos();
+            var listaCervejas = _integracaoNegocio.CervejaNegocio.ListarTodos();
+            var listaCervejarias = _integracaoNegocio.CervejariaNegocio.List();
+            var listaTipoCervejas = _integracaoNegocio.TipoCervejaNegocio.ListarTodos();
 
             CervejaModel model = new CervejaModel();
 
             model.ListaCervejas = CervejaModel.ConvertList(listaCervejas);
+            model.ListaCervejaria = CervejariaVM.Convert(listaCervejarias);
+            model.ListaTipoCerveja = TipoCervejaModel.Convert(listaTipoCervejas);
 
             return View(model);
         }
@@ -32,12 +36,15 @@ namespace TopBeers.Controllers
         public IActionResult SalvarCerveja(CervejaModel model)
         {
 
+            if (!ModelState.IsValid)
+                return RedirectToAction("Index");
+
             if (model == null)
                 throw new Exception("Model null");
 
             var cerveja = CervejaModel.Convert(model);
 
-            _cervejaNegocio.SalvarCerveja(cerveja);
+            _integracaoNegocio.CervejaNegocio.SalvarCerveja(cerveja);
 
 
             return RedirectToAction("Index");
@@ -47,7 +54,7 @@ namespace TopBeers.Controllers
         [HttpGet]
         public IActionResult ExcluirCerveja(int idCerveja)
         {
-            _cervejaNegocio.ExcluirCerveja(idCerveja);
+            _integracaoNegocio.CervejaNegocio.ExcluirCerveja(idCerveja);
 
             return RedirectToAction("Index");
         }
@@ -55,7 +62,7 @@ namespace TopBeers.Controllers
         [HttpGet]
         public IActionResult AprovarCerveja(int idCerveja)
         {
-            _cervejaNegocio.AprovarCerveja(idCerveja);
+            _integracaoNegocio.CervejaNegocio.AprovarCerveja(idCerveja);
 
             return RedirectToAction("Index");
         }
@@ -63,7 +70,7 @@ namespace TopBeers.Controllers
         [HttpGet]
         public IActionResult DesaprovarCerveja(int idCerveja)
         {
-            _cervejaNegocio.DesaprovarCerveja(idCerveja);
+            _integracaoNegocio.CervejaNegocio.DesaprovarCerveja(idCerveja);
 
             return RedirectToAction("Index");
         }
@@ -72,7 +79,7 @@ namespace TopBeers.Controllers
         public IActionResult BuscarCerveja(string busca)
         {
 
-             var cervejas = _cervejaNegocio.BuscarCervejas(busca);
+             var cervejas = _integracaoNegocio.CervejaNegocio.BuscarCervejas(busca);
 
             var model = new CervejaModel();
             model.ListaCervejas = CervejaModel.ConvertList(cervejas);

@@ -9,6 +9,10 @@ namespace TopBeers.Models
 {
     public class CervejaModel
     {
+        public CervejaModel()
+        {
+        }
+
         public int Id { get; set; }
 
         [Required]
@@ -25,8 +29,22 @@ namespace TopBeers.Models
         [Display(Name = "Graduação Alcoólica")]
         public float GrauAlcoolico { get; set; }
 
-        public int CurrentTipoCervejaId { get; set; }
+
+        public string Foto { get; set; }
+        public string Origem { get; set; }
+        public string Amargor { get; set; }
+        public string Aroma { get; set; }
+        public string Coloracao { get; set; }
+        public string Historia { get; set; }
+
+        [Display(Name = "Cervejaria")]
+        public int IdCervejaria { get; set; }
+        [Display(Name = "Tipo da Cerveja")]
+        public int IdTipoCerveja { get; set; }
         public TipoCervejaModel TipoCerveja { get; set; }
+
+        public IEnumerable<CervejariaVM> ListaCervejaria { get; set; }
+        public IEnumerable<TipoCervejaModel> ListaTipoCerveja { get; set; }
 
         public IEnumerable<CervejaModel> ListaCervejas { get; set; }
 
@@ -36,11 +54,12 @@ namespace TopBeers.Models
 
             //destino.TipoCerveja = origem.TipoCerveja;
             destino.Id = origem.Id;
-            destino.TipoCervejaId = origem.CurrentTipoCervejaId;
+            destino.TipoCervejaId = origem.IdTipoCerveja;
             destino.Aprovado = origem.Aprovado;
             destino.DescricaoCerveja = origem.DescricaoCerveja;
             destino.GrauAlcoolico = origem.GrauAlcoolico;
             destino.NomeCerveja = origem.NomeCerveja;
+            destino.CervejariaId = origem.IdCervejaria;
 
             return destino;
         }
@@ -52,11 +71,12 @@ namespace TopBeers.Models
             {
                 var destino = new CervejaModel();
                 destino.Id = item.Id;
-                destino.CurrentTipoCervejaId = item.TipoCervejaId;
+                destino.IdTipoCerveja = item.TipoCervejaId;
                 destino.Aprovado = item.Aprovado;
                 destino.DescricaoCerveja = item.DescricaoCerveja;
                 destino.GrauAlcoolico = item.GrauAlcoolico;
                 destino.NomeCerveja = item.NomeCerveja;
+                destino.IdCervejaria = item.CervejariaId;
 
                 lista.Add(destino);
             }
