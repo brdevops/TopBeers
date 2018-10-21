@@ -8,6 +8,7 @@ using TopBeers.Models;
 
 namespace TopBeers.Controllers
 {
+
     public class CervejaController : Controller
     {
         private readonly CervejaNegocio _cervejaNegocio;
@@ -39,7 +40,7 @@ namespace TopBeers.Controllers
             _cervejaNegocio.SalvarCerveja(cerveja);
 
 
-            return View("Index");
+            return RedirectToAction("Index");
 
         }
 

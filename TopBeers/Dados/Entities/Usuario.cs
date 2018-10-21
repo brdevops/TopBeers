@@ -8,6 +8,11 @@ namespace TopBeers.Dados.Entities
 {
     public class Usuario : IdentityUser<int>
     {
+
+        public string Name { get; set; }
+        public string LastName { get; set; }
+
         public ICollection<Avaliacao> Avaliacoes { get; set; }
+
     }
 }

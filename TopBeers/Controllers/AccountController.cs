@@ -220,7 +220,7 @@ namespace TopBeers.Controllers
                 ViewData["ReturnUrl"] = returnUrl;
                 if (ModelState.IsValid)
                 {
-                    var user = new Usuario { UserName = model.Email, Email = model.Email };
+                    var user = new Usuario { UserName = model.UserName, Email = model.Email, Name = model.Name, LastName = model.LastName};
                     var result = await _userManager.CreateAsync(user, model.Password);
                     if (result.Succeeded)
                     {

@@ -23,5 +23,17 @@ namespace TopBeers.Models.AccountViewModels
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "Nome")]
+        public string Name { get; set; }
+
+        [Required]
+        [Display(Name = "Sobrenome")]
+        public string LastName { get; set; }
+
+        [Required]
+        [Display(Name = "UserName")]
+        public string UserName { get; set; }
     }
 }
