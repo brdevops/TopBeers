@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -68,6 +69,22 @@ namespace TopBeers.Dados.Negocio
                 var lista = uow.CervejaRepositorio.GetAll();
 
                 return  lista.ToList();
+            }
+        }
+
+        public Cerveja BuscarCerveja(int idCerveja)
+        {
+            if(idCerveja == null)
+                throw new Exception("Id nulo");
+
+            using (var uow = new UnitOfWork())
+            {
+                var cerveja = uow.CervejaRepositorio.GetById(idCerveja);
+
+                if(cerveja == null)
+                    throw  new Exception("Cerveja não encontrada");
+
+                return cerveja;
             }
         }
 

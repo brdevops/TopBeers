@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -42,7 +43,14 @@ namespace TopBeers.Controllers
             if (model == null)
                 throw new Exception("Model null");
 
+
             var cerveja = CervejaModel.Convert(model);
+            cerveja.Foto = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\cervejas", model.ArquivoUpload.FileName);
+
+            using (var stream = new FileStream(cerveja.Foto, FileMode.Create))
+            {
+                model.ArquivoUpload.CopyTo(stream);
+            }
 
             _integracaoNegocio.CervejaNegocio.SalvarCerveja(cerveja);
 
@@ -86,6 +94,16 @@ namespace TopBeers.Controllers
 
             return View("Index", model);
 
+        }
+
+        public IActionResult Avaliar(int idCerveja)
+        {
+            var cerveja = _integracaoNegocio.CervejaNegocio.BuscarCerveja(idCerveja);
+
+            var model = new CervejaModel();
+            model = CervejaModel.Convert(cerveja);
+
+            return View();
         }
     }
 }

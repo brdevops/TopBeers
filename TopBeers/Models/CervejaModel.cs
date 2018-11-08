@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using TopBeers.Dados.Entities;
 
 namespace TopBeers.Models
@@ -31,6 +32,8 @@ namespace TopBeers.Models
 
 
         public string Foto { get; set; }
+        [Display(Name = "Foto")]
+        public IFormFile ArquivoUpload { get; set; }
         public string Origem { get; set; }
         public string Amargor { get; set; }
         public string Aroma { get; set; }
@@ -60,6 +63,32 @@ namespace TopBeers.Models
             destino.GrauAlcoolico = origem.GrauAlcoolico;
             destino.NomeCerveja = origem.NomeCerveja;
             destino.CervejariaId = origem.IdCervejaria;
+            destino.Historia = origem.Historia;
+            destino.Amargor = origem.Amargor;
+            destino.Aroma = origem.Aroma;
+            destino.Coloracao = origem.Coloracao;
+            destino.Foto = origem.Foto;
+
+            return destino;
+        }
+
+        public static CervejaModel Convert(Cerveja origem)
+        {
+            CervejaModel destino = new CervejaModel();
+
+            //destino.TipoCerveja = origem.TipoCerveja;
+            destino.Id = origem.Id;
+            destino.IdTipoCerveja = origem.TipoCervejaId;
+            destino.Aprovado = origem.Aprovado;
+            destino.DescricaoCerveja = origem.DescricaoCerveja;
+            destino.GrauAlcoolico = origem.GrauAlcoolico;
+            destino.NomeCerveja = origem.NomeCerveja;
+            destino.IdCervejaria = origem.TipoCervejaId;
+            destino.Historia = origem.Historia;
+            destino.Amargor = origem.Amargor;
+            destino.Aroma = origem.Aroma;
+            destino.Coloracao = origem.Coloracao;
+            destino.Foto = origem.Foto;
 
             return destino;
         }

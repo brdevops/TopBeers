@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
@@ -11,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using TopBeers.Dados.Entities;
 using TopBeers.Models;
 using TopBeers.Services;
@@ -30,9 +32,11 @@ namespace TopBeers
         public void ConfigureServices(IServiceCollection services)
         {
 
+            //configuração do banco de dados
             services.AddDbContext<CervejaContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            //configura tabela usuarios como default identity
             services.AddDefaultIdentity<Usuario>()
                 .AddEntityFrameworkStores<CervejaContext>()
                 .AddDefaultTokenProviders();
@@ -48,6 +52,11 @@ namespace TopBeers
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+
+            //configuração para upload de arquivos
+            services.AddSingleton<IFileProvider>(
+                new PhysicalFileProvider(
+                    Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);

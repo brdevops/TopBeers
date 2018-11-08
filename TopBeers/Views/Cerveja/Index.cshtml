@@ -1,6 +1,7 @@
 ﻿@using System.Linq
 @using Microsoft.AspNetCore.Mvc.Rendering
 @using TopBeers.Util.Helper
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @model TopBeers.Models.CervejaModel
 @{
     ViewBag.Title = "index";
@@ -67,8 +68,9 @@
                     <td>@cerveja.Aprovado</td>
                     <td>@cerveja.DescricaoCerveja</td>
                     <td>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Editar</button>
-                        <a href="@Url.Action("ExcluirProfessor", "Professor", new { idProfessor = cerveja.Id })" class="btn btn-danger">Excluir</a>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editarModal">Editar</button>
+                        <a href="@Url.Action("ExcluirCerveja", "Cerveja", new { idCerveja = cerveja.Id })" class="btn btn-danger">Excluir</a>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalDetalhes">Detalhar</button>
                     </td>
                 </tr>
             }
@@ -79,7 +81,7 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -94,67 +96,69 @@
                     @Html.AntiForgeryToken();
 
                     <div class="row">
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-12 mb-3">
                             @Html.LabelFor(model => model.NomeCerveja)
-                            @Html.TextBoxFor(model => model.NomeCerveja, new { @class = "form-control" })
+                            @Html.TextBoxFor(model => model.NomeCerveja, new { @class = "form-control", placeholder = "Nome da cerveja", required = "require" })
                             <div class="invalid-feedback">
                                 Valid first name is required.
                             </div>
                         </div>
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-3 mb-3">
                             @Html.LabelFor(model => model.GrauAlcoolico)
-                            @Html.TextBoxFor(model => model.GrauAlcoolico, new { @class = "form-control" })
+                            @Html.TextBoxFor(model => model.GrauAlcoolico, new { @class = "form-control", placeholder = "0,0", required = "require" })
                             <div class="invalid-feedback">
                                 Valid last name is required.
                             </div>
                         </div>
-                        <div class="col-md-4 mb-3">
-                            @Html.LabelFor(model => model.DescricaoCerveja)
-                            @Html.TextBoxFor(model => model.DescricaoCerveja, new { @class = "form-control" })
-                            <div class="invalid-feedback">
-                                Valid last name is required.
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-3 mb-3">
                             @Html.LabelFor(model => model.Origem)
-                            @Html.TextBoxFor(model => model.Origem, new { @class = "form-control" })
+                            @Html.TextBoxFor(model => model.Origem, new { @class = "form-control", placeholder = "Origem", required = "require" })
                             <div class="invalid-feedback">
                                 Valid last name is required.
                             </div>
                         </div>
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-3 mb-3">
                             @Html.LabelFor(model => model.Amargor)
-                            @Html.TextBoxFor(model => model.Amargor, new { @class = "form-control" })
+                            @Html.TextBoxFor(model => model.Amargor, new { @class = "form-control", placeholder = "Amargor", required = "require" })
                             <div class="invalid-feedback">
                                 Valid last name is required.
                             </div>
                         </div>
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-3 mb-3">
                             @Html.LabelFor(model => model.Aroma)
-                            @Html.TextBoxFor(model => model.Aroma, new { @class = "form-control" })
+                            @Html.TextBoxFor(model => model.Aroma, new { @class = "form-control", placeholder = "Aroma", required = "require" })
                             <div class="invalid-feedback">
                                 Valid last name is required.
                             </div>
                         </div>
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-3 mb-3">
                             @Html.LabelFor(model => model.Coloracao)
-                            @Html.TextBoxFor(model => model.Coloracao, new { @class = "form-control" })
+                            @Html.TextBoxFor(model => model.Coloracao, new { @class = "form-control", placeholder = "Coloração", required = "require" })
                             <div class="invalid-feedback">
                                 Valid last name is required.
                             </div>
                         </div>
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-3 mb-3">
                             @Html.LabelFor(model => model.IdTipoCerveja)
-                            @Html.DropDownListFor(model => model.IdTipoCerveja, new SelectList(Model.ListaTipoCerveja, "Id", "Tipo"), "Selecione o tipo", new { @class = "form-control" })
+                            @Html.DropDownListFor(model => model.IdTipoCerveja, new SelectList(Model.ListaTipoCerveja, "Id", "Tipo"), "Selecione o tipo", new { @class = "form-control", required = "required" })
                             <div class="invalid-feedback">
                                 Valid first name is required.
                             </div>
                         </div>
                         <div class="col-md-4 mb-3">
                             @Html.LabelFor(model => model.IdCervejaria)
-                            @Html.DropDownListFor(model => model.IdCervejaria, new SelectList(Model.ListaCervejaria, "IdCervejaria", "Nome"), "Selecione a cervejaria", new { @class = "form-control" })
+                            @Html.DropDownListFor(model => model.IdCervejaria, new SelectList(Model.ListaCervejaria, "IdCervejaria", "Nome"), "Selecione a cervejaria", new { @class = "form-control", required = "required" })
                             <div class="invalid-feedback">
                                 Valid first name is required.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            @Html.LabelFor(model => model.DescricaoCerveja)
+                            @Html.TextAreaFor(model => model.DescricaoCerveja, new { @class = "form-control", placeholder = "Descrição", required = "require" })
+                            <div class="invalid-feedback">
+                                Valid last name is required.
                             </div>
                         </div>
                     </div>
@@ -162,7 +166,17 @@
                     <div class="row">
                         <div class="col-md-12 mb-3">
                             @Html.LabelFor(model => model.Historia)
-                            @Html.TextAreaFor(model => model.Historia, new { @class = "form-control" })
+                            @Html.TextAreaFor(model => model.Historia, new { @class = "form-control", required = "required" })
+                            <div class="invalid-feedback">
+                                Valid last name is required.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            @Html.LabelFor(model => model.ArquivoUpload)
+                            @Html.TextBoxFor(model => model.ArquivoUpload, new { @class = "form-control", required = "required", type = "file" })
                             <div class="invalid-feedback">
                                 Valid last name is required.
                             </div>
@@ -183,67 +197,61 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Novo Professor</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Nova Cerveja</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                @using (Html.BeginForm("SalvarCerveja", "Cerveja", FormMethod.Post))
+                @using (Html.BeginForm("SalvarCerveja", "Cerveja", FormMethod.Post, 
+                    new { enctype = "multipart/form-data" }))
                 {
                     @Html.AntiForgeryToken();
 
                     <div class="row">
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-12 mb-3">
                             @Html.LabelFor(model => model.NomeCerveja)
-                            @Html.TextBoxFor(model => model.NomeCerveja, new { @class = "form-control", placeholder = "short name", required = "require" })
+                            @Html.TextBoxFor(model => model.NomeCerveja, new { @class = "form-control", placeholder = "Nome da cerveja", required = "require" })
                             <div class="invalid-feedback">
                                 Valid first name is required.
                             </div>
                         </div>
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-3 mb-3">
                             @Html.LabelFor(model => model.GrauAlcoolico)
-                            @Html.TextBoxFor(model => model.GrauAlcoolico, new { @class = "form-control", placeholder = "short name", required = "require" })
+                            @Html.TextBoxFor(model => model.GrauAlcoolico, new { @class = "form-control", placeholder = "0,0", required = "require" })
                             <div class="invalid-feedback">
                                 Valid last name is required.
                             </div>
                         </div>
-                        <div class="col-md-4 mb-3">
-                            @Html.LabelFor(model => model.DescricaoCerveja)
-                            @Html.TextBoxFor(model => model.DescricaoCerveja, new { @class = "form-control", placeholder = "short name", required = "require" })
-                            <div class="invalid-feedback">
-                                Valid last name is required.
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-3 mb-3">
                             @Html.LabelFor(model => model.Origem)
-                            @Html.TextBoxFor(model => model.Origem, new { @class = "form-control", placeholder = "short name", required = "require" })
+                            @Html.TextBoxFor(model => model.Origem, new { @class = "form-control", placeholder = "Origem", required = "require" })
                             <div class="invalid-feedback">
                                 Valid last name is required.
                             </div>
                         </div>
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-3 mb-3">
                             @Html.LabelFor(model => model.Amargor)
-                            @Html.TextBoxFor(model => model.Amargor, new { @class = "form-control", placeholder = "short name", required = "require" })
+                            @Html.TextBoxFor(model => model.Amargor, new { @class = "form-control", placeholder = "Amargor", required = "require" })
                             <div class="invalid-feedback">
                                 Valid last name is required.
                             </div>
                         </div>
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-3 mb-3">
                             @Html.LabelFor(model => model.Aroma)
-                            @Html.TextBoxFor(model => model.Aroma, new { @class = "form-control", placeholder = "short name", required = "require" })
+                            @Html.TextBoxFor(model => model.Aroma, new { @class = "form-control", placeholder = "Aroma", required = "require" })
                             <div class="invalid-feedback">
                                 Valid last name is required.
                             </div>
                         </div>
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-3 mb-3">
                             @Html.LabelFor(model => model.Coloracao)
-                            @Html.TextBoxFor(model => model.Coloracao, new { @class = "form-control" , placeholder = "short name", required="require" })
+                            @Html.TextBoxFor(model => model.Coloracao, new { @class = "form-control", placeholder = "Coloração", required = "require" })
                             <div class="invalid-feedback">
                                 Valid last name is required.
                             </div>
                         </div>
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-3 mb-3">
                             @Html.LabelFor(model => model.IdTipoCerveja)
                             @Html.DropDownListFor(model => model.IdTipoCerveja, new SelectList(Model.ListaTipoCerveja, "Id", "Tipo"), "Selecione o tipo", new { @class = "form-control", required = "required" })
                             <div class="invalid-feedback">
@@ -258,11 +266,30 @@
                             </div>
                         </div>
                     </div>
-                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            @Html.LabelFor(model => model.DescricaoCerveja)
+                            @Html.TextAreaFor(model => model.DescricaoCerveja, new { @class = "form-control", placeholder = "Descrição", required = "require" })
+                            <div class="invalid-feedback">
+                                Valid last name is required.
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="row">
                         <div class="col-md-12 mb-3">
                             @Html.LabelFor(model => model.Historia)
-                            @Html.TextAreaFor(model => model.Historia, new { @class = "form-control",  required = "required" })
+                            @Html.TextAreaFor(model => model.Historia, new { @class = "form-control", required = "required" })
+                            <div class="invalid-feedback">
+                                Valid last name is required.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            @Html.LabelFor(model => model.ArquivoUpload)
+                            @Html.TextBoxFor(model => model.ArquivoUpload, new { @class = "form-control", required = "required", type = "file" })
                             <div class="invalid-feedback">
                                 Valid last name is required.
                             </div>

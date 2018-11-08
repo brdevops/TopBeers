@@ -16,7 +16,7 @@ namespace TopBeers.Dados.Entities
         public string DescricaoCerveja { get; set; }
         //[MaxLength(20)]
         public float GrauAlcoolico { get; set; }
-        [MaxLength(50)]
+        [MaxLength(150)]
         public string Foto { get; set; }
         [MaxLength(50)]
         public string Origem { get; set; }
