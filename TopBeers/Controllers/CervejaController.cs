@@ -45,9 +45,10 @@ namespace TopBeers.Controllers
 
 
             var cerveja = CervejaModel.Convert(model);
-            cerveja.Foto = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\cervejas", model.ArquivoUpload.FileName);
+            cerveja.Foto = model.ArquivoUpload.FileName;
+            model.CaminhoFoto = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\cervejas", model.ArquivoUpload.FileName);
 
-            using (var stream = new FileStream(cerveja.Foto, FileMode.Create))
+            using (var stream = new FileStream(model.CaminhoFoto, FileMode.Create))
             {
                 model.ArquivoUpload.CopyTo(stream);
             }
@@ -86,13 +87,16 @@ namespace TopBeers.Controllers
         [HttpPost]
         public IActionResult BuscarCerveja(string busca)
         {
+            //Fazer tratamento para quando a busca estiver null
+
 
              var cervejas = _integracaoNegocio.CervejaNegocio.BuscarCervejas(busca);
 
             var model = new CervejaModel();
             model.ListaCervejas = CervejaModel.ConvertList(cervejas);
+            model.Busca = busca;
 
-            return View("Index", model);
+            return View("ResultadoBusca", model);
 
         }
 

@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using TopBeers.Dados.Negocio;
 using TopBeers.Models;
 
 namespace TopBeers.Controllers
@@ -11,10 +12,22 @@ namespace TopBeers.Controllers
     public class HomeController : Controller
     {
         //private CervejaContext db = new CervejaContext();
+        private readonly IntegracaoNegocio _integracaoNegocio;
+
+        public HomeController()
+        {
+            _integracaoNegocio = new IntegracaoNegocio();
+        }
 
         public IActionResult Index()
         {
-            return View();
+            var listaCervejas = _integracaoNegocio.CervejaNegocio.ListarTodos();
+
+            CervejaModel model = new CervejaModel();
+
+            model.ListaCervejas = CervejaModel.ConvertList(listaCervejas);
+
+            return View(model);
         }
 
         public IActionResult Beneficios()

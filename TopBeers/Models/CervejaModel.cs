@@ -30,8 +30,8 @@ namespace TopBeers.Models
         [Display(Name = "Graduação Alcoólica")]
         public float GrauAlcoolico { get; set; }
 
-
         public string Foto { get; set; }
+        public string CaminhoFoto { get; set; }
         [Display(Name = "Foto")]
         public IFormFile ArquivoUpload { get; set; }
         public string Origem { get; set; }
@@ -39,6 +39,7 @@ namespace TopBeers.Models
         public string Aroma { get; set; }
         public string Coloracao { get; set; }
         public string Historia { get; set; }
+        public string Busca { get; set; }
 
         [Display(Name = "Cervejaria")]
         public int IdCervejaria { get; set; }
@@ -106,6 +107,11 @@ namespace TopBeers.Models
                 destino.GrauAlcoolico = item.GrauAlcoolico;
                 destino.NomeCerveja = item.NomeCerveja;
                 destino.IdCervejaria = item.CervejariaId;
+                destino.Historia = item.Historia;
+                destino.Amargor = item.Amargor;
+                destino.Aroma = item.Aroma;
+                destino.Coloracao = item.Coloracao;
+                destino.Foto = item.Foto;
 
                 lista.Add(destino);
             }

@@ -153,7 +153,9 @@ namespace TopBeers.Dados.Negocio
                     Aprovado = c.Aprovado,
                     GrauAlcoolico = c.GrauAlcoolico,
                     NomeCerveja = c.NomeCerveja,
-                    Id = c.Id
+                    Id = c.Id,
+                    Foto =  c.Foto,
+                    Historia = c.Historia
                 };
 
             if (result == null)
@@ -168,8 +170,10 @@ namespace TopBeers.Dados.Negocio
                         Aprovado = c.Aprovado,
                         GrauAlcoolico = c.GrauAlcoolico,
                         NomeCerveja = c.NomeCerveja,
-                        Id = c.Id
-                    }; ;
+                        Id = c.Id,
+                        Foto = c.Foto,
+                        Historia = c.Historia
+                    }; 
                 
             }
 
@@ -185,8 +189,10 @@ namespace TopBeers.Dados.Negocio
                         Aprovado = c.Aprovado,
                         GrauAlcoolico = c.GrauAlcoolico,
                         NomeCerveja = c.NomeCerveja,
-                        Id = c.Id
-                    }; ;
+                        Id = c.Id,
+                        Foto = c.Foto,
+                        Historia = c.Historia
+                    }; 
             }
             if (result == null)
             {
@@ -201,8 +207,10 @@ namespace TopBeers.Dados.Negocio
                         Aprovado = c.Aprovado,
                         GrauAlcoolico = c.GrauAlcoolico,
                         NomeCerveja = c.NomeCerveja,
-                        Id = c.Id
-                    }; ;
+                        Id = c.Id,
+                        Foto = c.Foto,
+                        Historia = c.Historia
+                    }; 
             }
 
             return result.ToList();
