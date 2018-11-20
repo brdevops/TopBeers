@@ -1,0 +1,190 @@
+﻿@using System.Linq
+@using Microsoft.AspNetCore.Mvc.Rendering
+@using TopBeers.Util.Helper
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model TopBeers.Models.CervejariaVM
+@{
+    ViewBag.Title = "index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center">Cervejaria</h2>
+
+<div class="container">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#novoProfessor">Nova</button>
+    <br /><br />
+
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Quantidade</h5>
+                    @Model.ListaCervejarias.Count()
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card  text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Alguma coisa</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card  text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Outra coisa</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br /><br />
+</div>
+
+
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Nome</th>
+                <th>Fundação</th>
+                <th>Cervejas</th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var cervejaria in Model.ListaCervejarias)
+            {
+                <tr>
+                    <th scope="row"><a href="#">@cervejaria.IdCervejaria</a></th>
+                    <td>@cervejaria.Nome</td>
+                    <td>@cervejaria.Fundacao</td>
+                    <td>@cervejaria.Cervejas</td>
+                    <td>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editarModal">Editar</button>
+                        <a href="@Url.Action("ExcluirCervejaria", "Cervejaria", new { idCervejaria = cervejaria.IdCervejaria })" class="btn btn-danger">Excluir</a>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalDetalhes">Detalhar</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="editarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("SalvarCervejaria", "Cervejaria", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken();
+
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            @Html.LabelFor(model => model.Nome)
+                            @Html.TextBoxFor(model => model.Nome, new { @class = "form-control", placeholder = "Nome da cervejaria", required = "require" })
+                            <div class="invalid-feedback">
+                                Valid first name is required.
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            @Html.LabelFor(model => model.Fundacao)
+                            @Html.TextBoxFor(model => model.Fundacao, new { @class = "form-control", placeholder = "0,0", required = "require" })
+                            <div class="invalid-feedback">
+                                Valid last name is required.
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            @Html.LabelFor(model => model.Cervejas)
+                            @Html.TextBoxFor(model => model.Cervejas, new { @class = "form-control", placeholder = "Origem", required = "require" })
+                            <div class="invalid-feedback">
+                                Valid last name is required.
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            @Html.LabelFor(model => model.IdCervejaria)
+                            @Html.DropDownListFor(model => model.IdCervejaria, new SelectList(Model.ListaCervejaria, "IdCervejaria", "Nome"), "Selecione a cervejaria", new { @class = "form-control", required = "required" })
+                            <div class="invalid-feedback">
+                                Valid first name is required.
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Novo  -->
+<div class="modal fade" id="novoProfessor" tabindex="-1" role="dialog" aria-labelledby="novoProfessor" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Nova Cerveja</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("SalvarCervejaria", "Cervejaria", FormMethod.Post,
+                   new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken();
+
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            @Html.LabelFor(model => model.Nome)
+                            @Html.TextBoxFor(model => model.Nome, new { @class = "form-control", placeholder = "Nome da cerveja", required = "require" })
+                            <div class="invalid-feedback">
+                                Valid first name is required.
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            @Html.LabelFor(model => model.Fundacao)
+                            @Html.TextBoxFor(model => model.Fundacao, new { @class = "form-control", placeholder = "0,0", required = "require" })
+                            <div class="invalid-feedback">
+                                Valid last name is required.
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            @Html.LabelFor(model => model.Cervejas)
+                            @Html.TextBoxFor(model => model.Cervejas, new { @class = "form-control", placeholder = "Origem", required = "require" })
+                            <div class="invalid-feedback">
+                                Valid last name is required.
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            @Html.LabelFor(model => model.IdCervejaria)
+                            @Html.DropDownListFor(model => model.IdCervejaria, new SelectList(Model.ListaCervejaria, "IdCervejaria", "Nome"), "Selecione a cervejaria", new { @class = "form-control", required = "required" })
+                            <div class="invalid-feedback">
+                                Valid first name is required.
+                            </div>
+                        </div>
+                    </div>
+                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

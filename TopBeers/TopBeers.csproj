@@ -25,7 +25,6 @@
 
   <ItemGroup>
     <Folder Include="Util\DataAnnotations\" />
-    <Folder Include="Views\Cervejaria\" />
   </ItemGroup>
 
 </Project>
