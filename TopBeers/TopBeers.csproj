@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <Folder Include="Util\DataAnnotations\" />
+    <Folder Include="Views\Avaliação\" />
   </ItemGroup>
 
 </Project>

@@ -85,11 +85,13 @@ namespace TopBeers.Dados.Negocio
             {
                 var cerveja = uow.CervejariaRepositorio.GetById(idCervejaria);
                 if (cerveja == null)
-                    throw new Exception("Cerveja não localizada");
+                    throw new Exception("Cervejaria não localizada");
 
-                uow.CervejaRepositorio.Remove(idCervejaria);
+                uow.CervejariaRepositorio.Remove(idCervejaria);
                 uow.SalvarAlteracoes();
             }
         }
+
     }
+}
 }
