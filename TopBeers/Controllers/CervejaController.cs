@@ -107,7 +107,7 @@ namespace TopBeers.Controllers
             var model = new CervejaModel();
             model = CervejaModel.Convert(cerveja);
 
-            return View();
+            return View(model);
         }
     }
 }

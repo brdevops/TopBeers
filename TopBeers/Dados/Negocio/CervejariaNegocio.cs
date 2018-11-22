@@ -44,6 +44,22 @@ namespace TopBeers.Dados.Negocio
             }
         }
 
+        public Cervejaria GetById(int? idCervejaria)
+        {
+            if(idCervejaria == null)
+                throw new Exception("Entite nulo");
+
+            var cervejaria = new Cervejaria();
+            using (var uow = new UnitOfWork())
+            {
+                cervejaria = uow.CervejariaRepositorio.GetById(idCervejaria.Value);
+                return cervejaria;
+            }
+
+            return cervejaria;
+
+        }
+
         public void Atualizar(Cervejaria cervejaria)
         {
             if (cervejaria == null)
@@ -93,5 +109,4 @@ namespace TopBeers.Dados.Negocio
         }
 
     }
-}
 }

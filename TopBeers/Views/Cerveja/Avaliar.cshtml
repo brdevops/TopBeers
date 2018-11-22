@@ -1,4 +1,6 @@
-﻿@model TopBeers.Models.CervejaModel
+﻿@using TopBeers.Util
+@using TopBeers.Util.Helper
+@model TopBeers.Models.CervejaModel
 @{
     ViewBag.Title = "Cerveja";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -29,24 +31,24 @@
                             <tr>
                                 <th scope="row">Tipo</th>
                                 <td colspan="3">Pilsen</td>
-                                <td class="font-weight-bold">Amargor</td>
+                                <td class="font-weight-bold">@Model.Amargor</td>
                                 <td colspan="2">Leve</td>
                             </tr>
                             <tr>
                                 <th scope="row">Origem</th>
-                                <td colspan="3">Belo Horizonte/MG</td>
-                                <td class="font-weight-bold">Aromas</td>
-                                <td colspan="2">Chocolate, malte torrado</td>
+                                <td colspan="3">@Model.Origem</td>
+                                <td class="font-weight-bold">Aroma</td>
+                                <td colspan="2">@Model.Aroma</td>
                             </tr>
                             <tr>
                                 <th scope="row">Teor Alcoólico</th>
-                                <td colspan="3">4,8%</td>
+                                <td colspan="3">@Model.GrauAlcoolico</td>
                                 <td class="font-weight-bold">Coloração </td>
-                                <td colspan="2">Marrom</td>
+                                <td colspan="2">@Model.Coloracao</td>
                             </tr>
                             <tr>
                                 <th scope="row">Cervejaria</th>
-                                <td colspan="6">Ambev</td>
+                                <td colspan="6">@ControllerHelper.ObterCervejariaPorId(@Model.IdCervejaria)</td>
                             </tr>
                             <tr>
                                 <th scope="row">Nota</th>
@@ -74,12 +76,7 @@
         <div class="col-md-9">
             <h3>História</h3>
             <p>
-                A história da marca se confunde com a da Companhia Cervejaria Brahma que a fabricava. O nome Brahma batizou diversos produtos da mesma cervejaria, tais como o Guaraná Brahma e a Brahma Extra. Com a fusão desta à Antarctica para a formação da AmBev, a marca Brahma seguiu como uma das principais a ser utilizada pela nova companhia. Porém o guaraná, mais adocicado que o Guaraná Antarctica, deixou de ser produzido, em favor do outrora concorrente.
-                Suas campanhas de publicidade foram premiadas em diversos festivais, como o de Cannes.
-            </p>
-            <p>
-                Sua cerveja, a partir da década de 2000 passou por um processo de internacionalização, passando a ser comercializada em trinta países, com destaque para a Bélgica, o Canadá, os Estados Unidos, a França, a Grã-Bretanha e os Países Baixos.
-                Em 2006, a cerveja Brahma ultrapassou em vendas a holandesa Heineken, tornando-se a 5ª cerveja mais vendida do mundo.
+                @Model.Historia
             </p>
         </div>
         <div class="col-md-3">
